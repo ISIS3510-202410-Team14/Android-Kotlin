@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.optic.moveon.presentation.screens.home.HomeScreen
 import com.optic.moveon.presentation.screens.login.LoginScreen
 import com.optic.moveon.presentation.screens.signUp.SignupScreen
 
@@ -21,6 +22,9 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(route = AppScreen.Signup.route){
             SignupScreen(navController)
+        }
+        composable(route = AppScreen.Home.route){
+            HomeScreen(navController)
         }
 
     }
