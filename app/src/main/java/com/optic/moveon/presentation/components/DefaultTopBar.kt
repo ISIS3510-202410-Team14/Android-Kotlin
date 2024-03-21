@@ -29,7 +29,8 @@ fun DefaultTopBar(
     TopAppBar(
         title = {
             Text(text = title,
-                fontSize = 19.sp
+                fontSize = 19.sp,
+                color = Color.White
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(

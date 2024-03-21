@@ -17,10 +17,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DefaultButton(
+fun DefaultButtonIcon(
     text: String,
     onClick: () -> Unit,
     color: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.primary,
+    icon: ImageVector = Icons.Default.ArrowForward
 )
 {
     Button(
@@ -31,6 +32,9 @@ fun DefaultButton(
         colors = ButtonDefaults.buttonColors(color)
     ) {
         Text(text = text)
+        Icon(
+            imageVector = icon,
+            contentDescription = "")
     }
     Spacer(modifier = Modifier.height(10.dp))
 

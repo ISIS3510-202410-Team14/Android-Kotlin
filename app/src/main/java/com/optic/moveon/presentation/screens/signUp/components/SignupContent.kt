@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,20 +41,20 @@ import com.optic.moveon.presentation.navigation.AppScreen
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 
 @Composable
-fun SignupContent(navController: NavHostController){
+fun SignupContent(){
     Column (
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(80.dp))
         Image(
             modifier = Modifier.height(130.dp),
             painter = painterResource(id = R.drawable.user),
             contentDescription = "Logo de la aplicación"
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         CardForm()
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -61,10 +63,16 @@ fun SignupContent(navController: NavHostController){
 }
 @Composable
 fun CardForm(){
+    var username by remember{
+        mutableStateOf("")
+    }
     var email by remember {
         mutableStateOf("")
     }
     var password by remember {
+        mutableStateOf("")
+    }
+    var confirmpassword by remember {
         mutableStateOf("")
     }
     Card(
@@ -79,39 +87,47 @@ fun CardForm(){
         ) {
             Text(
                 modifier = Modifier.padding(top = 20.dp),
-                text = "LOGIN",
+                text = "SIGN UP",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "Please fill the details to continue"
             )
-            DefaultTextField(modifier = Modifier.padding(top = 25.dp),
+            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                value = username,
+                onValueChange = {username = it},
+                label = "Username",
+                icon = Icons.Default.AccountCircle
+                )
+            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
                 value = email,
                 onValueChange = {email = it},
                 label = "E-mail",
                 icon = Icons.Default.Email,
                 keyboardType = KeyboardType.Email)
-            DefaultTextField(modifier = Modifier.padding(top = 25.dp),
+            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
                 value = password,
                 onValueChange = {password = it},
                 label = "Password",
                 icon = Icons.Default.Lock,
                 hideText = true)
-            Spacer(modifier = Modifier.height(30.dp))
+            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                value = confirmpassword,
+                onValueChange = {confirmpassword = it},
+                label = "Confirm Password",
+                icon = Icons.Outlined.Lock,
+                hideText = true)
+            Spacer(modifier = Modifier.height(50.dp))
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp),
                 onClick = {  }
             ) {
-
-                Text(text = "SIGN IN")
+                Text(text = "SIGN UP")
             }
-            DefaultButton(text = "NEXT TIME",
-                onClick = { /*TODO*/ },
-                color = MaterialTheme.colorScheme.primary)
         }
     }
 }
@@ -121,6 +137,6 @@ fun CardForm(){
 @Composable
 fun DefaultPreview() {
     MoveOnTheme {
-        SignupContent(rememberNavController())
+        SignupContent()
     }
 }

@@ -1,5 +1,6 @@
 package com.optic.moveon.presentation.screens.login.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.optic.moveon.R
 import com.optic.moveon.presentation.components.DefaultButton
+import com.optic.moveon.presentation.components.DefaultButtonIcon
 import com.optic.moveon.presentation.components.DefaultTextField
 import com.optic.moveon.presentation.navigation.AppScreen
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
@@ -46,7 +48,7 @@ fun LoginContent(navController: NavHostController){
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(60.dp))
         Image(
             modifier = Modifier.height(130.dp),
             painter = painterResource(id = R.drawable.logo3),
@@ -115,16 +117,14 @@ fun CardForm(){
                 icon = Icons.Default.Lock,
                 hideText = true)
             Spacer(modifier = Modifier.height(30.dp))
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp),
-                onClick = {  }
-            ) {
-
-                Text(text = "SIGN IN")
-            }
-            DefaultButton(text = "NEXT TIME",
+            DefaultButton(
+                text = "SIGN IN",
+                onClick = {
+                    Log.d("LoginContent","Email: ${email}")
+                    Log.d("LoginContent","Password: ${password}")
+                }
+            )
+            DefaultButtonIcon(text = "NEXT TIME",
                 onClick = { /*TODO*/ },
                 color = MaterialTheme.colorScheme.primary)
         }

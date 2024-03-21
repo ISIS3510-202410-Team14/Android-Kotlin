@@ -1,7 +1,9 @@
 package com.optic.moveon.presentation.screens.signUp
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -12,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.optic.moveon.presentation.components.DefaultTopBar
+import com.optic.moveon.presentation.screens.signUp.components.SignupContent
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 import java.lang.reflect.Modifier
 
@@ -28,7 +31,8 @@ fun SignupScreen(navController: NavHostController) {
                  )
         },
         content = {
-                  Text(text = "SignupScreen")
+            SignupContent()
+
 
         },
         bottomBar = {}
