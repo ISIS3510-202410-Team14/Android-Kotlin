@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -42,7 +43,7 @@ import com.optic.moveon.presentation.screens.login.LoginViewModel
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 
 @Composable
-fun LoginContent(navController: NavHostController, viewModel: LoginViewModel){
+fun LoginContent(navController: NavHostController, viewModel: LoginViewModel = hiltViewModel()){
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -56,7 +57,56 @@ fun LoginContent(navController: NavHostController, viewModel: LoginViewModel){
             contentDescription = "Logo de la aplicación"
         )
         Spacer(modifier = Modifier.height(20.dp))
-        CardForm(viewModel)
+
+
+        Card(
+            modifier = Modifier.padding(start = 40.dp, end = 40.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.Transparent
+            )
+        ) {
+
+            Column(
+                modifier = Modifier.padding(horizontal = 20.dp)
+            ) {
+                Text(
+                    modifier = Modifier.padding(top = 20.dp),
+                    text = "LOGIN",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = "Please fill the details to continue"
+                )
+                DefaultTextField(modifier = Modifier.padding(top = 25.dp),
+                    value = viewModel.email.value,
+                    onValueChange = {viewModel.email.value = it},
+                    label = "E-mail",
+                    icon = Icons.Default.Email,
+                    keyboardType = KeyboardType.Email)
+                DefaultTextField(modifier = Modifier.padding(top = 25.dp),
+                    value = viewModel.password.value,
+                    onValueChange = {viewModel.password.value = it},
+                    label = "Password",
+                    icon = Icons.Default.Lock,
+                    hideText = true)
+                Spacer(modifier = Modifier.height(30.dp))
+                DefaultButton(
+                    text = "SIGN IN",
+                    onClick = {
+                        Log.d("LoginContent","Email: ${viewModel.email.value}")
+                        Log.d("LoginContent","Password: ${viewModel.password.value}")
+                    }
+                )
+                DefaultButtonIcon(text = "NEXT TIME",
+                    onClick = { /*TODO*/ },
+                    color = MaterialTheme.colorScheme.primary)
+            }
+        }
+
+
+
         Spacer(modifier = Modifier.height(20.dp))
         Row {
             Text(text = "Don't have an account?",
@@ -77,53 +127,6 @@ fun LoginContent(navController: NavHostController, viewModel: LoginViewModel){
 
     }
 }
-@Composable
-fun CardForm(viewModel: LoginViewModel){
-    Card(
-        modifier = Modifier.padding(start = 40.dp, end = 40.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
-        )
-    ) {
 
-        Column(
-            modifier = Modifier.padding(horizontal = 20.dp)
-        ) {
-            Text(
-                modifier = Modifier.padding(top = 20.dp),
-                text = "LOGIN",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = "Please fill the details to continue"
-            )
-            DefaultTextField(modifier = Modifier.padding(top = 25.dp),
-                value = viewModel.email.value,
-                onValueChange = {viewModel.email.value = it},
-                label = "E-mail",
-                icon = Icons.Default.Email,
-                keyboardType = KeyboardType.Email)
-            DefaultTextField(modifier = Modifier.padding(top = 25.dp),
-                value = viewModel.password.value,
-                onValueChange = {viewModel.password.value = it},
-                label = "Password",
-                icon = Icons.Default.Lock,
-                hideText = true)
-            Spacer(modifier = Modifier.height(30.dp))
-            DefaultButton(
-                text = "SIGN IN",
-                onClick = {
-                    Log.d("LoginContent","Email: ${viewModel.email.value}")
-                    Log.d("LoginContent","Password: ${viewModel.password.value}")
-                }
-            )
-            DefaultButtonIcon(text = "NEXT TIME",
-                onClick = { /*TODO*/ },
-                color = MaterialTheme.colorScheme.primary)
-        }
-    }
-}
 
 

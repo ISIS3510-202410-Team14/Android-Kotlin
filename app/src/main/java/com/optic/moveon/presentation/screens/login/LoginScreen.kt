@@ -15,12 +15,10 @@ import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 @Composable
 fun LoginScreen(navController: NavHostController) {
 
-    val viewModel = LoginViewModel()
-
     Scaffold(
         topBar = {},
         content = {
-            LoginContent(navController, viewModel)
+            LoginContent(navController)
                   },
         bottomBar = {}
     )

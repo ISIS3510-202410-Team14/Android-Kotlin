@@ -13,8 +13,9 @@ import androidx.navigation.compose.rememberNavController
 import com.optic.moveon.presentation.navigation.AppNavigation
 import com.optic.moveon.presentation.screens.login.LoginScreen
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
