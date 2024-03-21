@@ -31,6 +31,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -38,10 +39,11 @@ import com.optic.moveon.R
 import com.optic.moveon.presentation.components.DefaultButton
 import com.optic.moveon.presentation.components.DefaultTextField
 import com.optic.moveon.presentation.navigation.AppScreen
-import com.optic.moveon.presentation.ui.theme.MoveOnTheme
+import com.optic.moveon.presentation.screens.signUp.SignupViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SignupContent(){
+fun SignupContent(viewModel: SignupViewModel = hiltViewModel()){
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -55,88 +57,71 @@ fun SignupContent(){
             contentDescription = "Logo de la aplicación"
         )
         Spacer(modifier = Modifier.height(10.dp))
-        CardForm()
-        Spacer(modifier = Modifier.height(20.dp))
-
-
-    }
-}
-@Composable
-fun CardForm(){
-    var username by remember{
-        mutableStateOf("")
-    }
-    var email by remember {
-        mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
-    var confirmpassword by remember {
-        mutableStateOf("")
-    }
-    Card(
-        modifier = Modifier.padding(start = 40.dp, end = 40.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
-        )
-    ) {
-
-        Column(
-            modifier = Modifier.padding(horizontal = 20.dp)
+        Card(
+            modifier = Modifier.padding(start = 40.dp, end = 40.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.Transparent
+            )
         ) {
-            Text(
-                modifier = Modifier.padding(top = 20.dp),
-                text = "SIGN UP",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "Please fill the details to continue"
-            )
-            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
-                value = username,
-                onValueChange = {username = it},
-                label = "Username",
-                icon = Icons.Default.AccountCircle
-                )
-            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
-                value = email,
-                onValueChange = {email = it},
-                label = "E-mail",
-                icon = Icons.Default.Email,
-                keyboardType = KeyboardType.Email)
-            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
-                value = password,
-                onValueChange = {password = it},
-                label = "Password",
-                icon = Icons.Default.Lock,
-                hideText = true)
-            DefaultTextField(modifier = Modifier.padding(top = 15.dp),
-                value = confirmpassword,
-                onValueChange = {confirmpassword = it},
-                label = "Confirm Password",
-                icon = Icons.Outlined.Lock,
-                hideText = true)
-            Spacer(modifier = Modifier.height(50.dp))
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp),
-                onClick = {  }
+
+            Column(
+                modifier = Modifier.padding(horizontal = 20.dp)
             ) {
-                Text(text = "SIGN UP")
+                Text(
+                    modifier = Modifier.padding(top = 20.dp),
+                    text = "SIGN UP",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "Please fill the details to continue"
+                )
+                DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                    value = viewModel.username.value,
+                    onValueChange = {viewModel.username.value = it},
+                    label = "Username",
+                    icon = Icons.Default.AccountCircle,
+                    errorMsg = viewModel.usernameErrMsg.value,
+                    validateField = {viewModel.validateUsername()}
+                )
+                DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                    value = viewModel.email.value,
+                    onValueChange = {viewModel.email.value = it},
+                    label = "E-mail",
+                    icon = Icons.Default.Email,
+                    keyboardType = KeyboardType.Email,
+                    errorMsg = viewModel.emailErrMsg.value,
+                    validateField = {viewModel.validateEmail()}
+                    )
+                DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                    value = viewModel.password.value,
+                    onValueChange = {viewModel.password.value = it},
+                    label = "Password",
+                    icon = Icons.Default.Lock,
+                    hideText = true,
+                    errorMsg = viewModel.passwordErrMsg.value,
+                    validateField = {viewModel.validatePassword()}
+                    )
+                DefaultTextField(modifier = Modifier.padding(top = 15.dp),
+                    value = viewModel.confirmPassword.value,
+                    onValueChange = {viewModel.confirmPassword.value = it},
+                    label = "Confirm Password",
+                    icon = Icons.Outlined.Lock,
+                    hideText = true,
+                    errorMsg = viewModel.confirmPasswordErrMsg.value,
+                    validateField = {viewModel.validateConfirmPassword()}
+                    )
+                Spacer(modifier = Modifier.height(20.dp))
+                DefaultButton(
+                    text = "SIGN UP",
+                    onClick = { },
+                    enabled = viewModel.isEnabledLoginButton
+                )
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    MoveOnTheme {
-        SignupContent()
-    }
-}
