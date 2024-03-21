@@ -1,11 +1,11 @@
-package com.optic.moveon.screens.login
+package com.optic.moveon.presentation.screens.login
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.optic.moveon.screens.login.components.LoginContent
-import com.optic.moveon.ui.theme.MoveOnTheme
+import com.optic.moveon.presentation.screens.login.components.LoginContent
+import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

@@ -1,4 +1,4 @@
-package com.optic.moveon.ui.theme
+package com.optic.moveon.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

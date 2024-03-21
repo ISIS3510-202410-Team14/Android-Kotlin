@@ -1,4 +1,4 @@
-package com.optic.moveon.ui.theme
+package com.optic.moveon.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
