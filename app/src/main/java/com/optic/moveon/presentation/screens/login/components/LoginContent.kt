@@ -1,6 +1,7 @@
 package com.optic.moveon.presentation.screens.login.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,13 +29,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.optic.moveon.R
 import com.optic.moveon.presentation.components.DefaultButton
 import com.optic.moveon.presentation.components.DefaultTextField
+import com.optic.moveon.presentation.navigation.AppScreen
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 
 @Composable
-fun LoginContent(){
+fun LoginContent(navController: NavHostController){
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -56,7 +61,11 @@ fun LoginContent(){
                 color = Color.Gray
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "SIGN UP",
+            Text(
+                modifier = Modifier.clickable {
+                    navController.navigate(AppScreen.Signup.route)
+                },
+                text = "SIGN UP",
                 fontSize = 14.sp,
                 color = Color.DarkGray,
                 fontWeight = FontWeight.Bold
@@ -127,6 +136,6 @@ fun CardForm(){
 @Composable
 fun DefaultPreview() {
     MoveOnTheme {
-        LoginContent()
+        LoginContent(rememberNavController())
     }
 }
