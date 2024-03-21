@@ -38,10 +38,11 @@ import com.optic.moveon.presentation.components.DefaultButton
 import com.optic.moveon.presentation.components.DefaultButtonIcon
 import com.optic.moveon.presentation.components.DefaultTextField
 import com.optic.moveon.presentation.navigation.AppScreen
+import com.optic.moveon.presentation.screens.login.LoginViewModel
 import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 
 @Composable
-fun LoginContent(navController: NavHostController){
+fun LoginContent(navController: NavHostController, viewModel: LoginViewModel){
     Column (
         modifier = Modifier
             .fillMaxWidth(),
@@ -55,7 +56,7 @@ fun LoginContent(navController: NavHostController){
             contentDescription = "Logo de la aplicación"
         )
         Spacer(modifier = Modifier.height(20.dp))
-        CardForm()
+        CardForm(viewModel)
         Spacer(modifier = Modifier.height(20.dp))
         Row {
             Text(text = "Don't have an account?",
@@ -77,13 +78,7 @@ fun LoginContent(navController: NavHostController){
     }
 }
 @Composable
-fun CardForm(){
-    var email by remember {
-        mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
+fun CardForm(viewModel: LoginViewModel){
     Card(
         modifier = Modifier.padding(start = 40.dp, end = 40.dp),
         colors = CardDefaults.cardColors(
@@ -105,14 +100,14 @@ fun CardForm(){
                 text = "Please fill the details to continue"
             )
             DefaultTextField(modifier = Modifier.padding(top = 25.dp),
-                value = email,
-                onValueChange = {email = it},
+                value = viewModel.email.value,
+                onValueChange = {viewModel.email.value = it},
                 label = "E-mail",
                 icon = Icons.Default.Email,
                 keyboardType = KeyboardType.Email)
             DefaultTextField(modifier = Modifier.padding(top = 25.dp),
-                value = password,
-                onValueChange = {password = it},
+                value = viewModel.password.value,
+                onValueChange = {viewModel.password.value = it},
                 label = "Password",
                 icon = Icons.Default.Lock,
                 hideText = true)
@@ -120,8 +115,8 @@ fun CardForm(){
             DefaultButton(
                 text = "SIGN IN",
                 onClick = {
-                    Log.d("LoginContent","Email: ${email}")
-                    Log.d("LoginContent","Password: ${password}")
+                    Log.d("LoginContent","Email: ${viewModel.email.value}")
+                    Log.d("LoginContent","Password: ${viewModel.password.value}")
                 }
             )
             DefaultButtonIcon(text = "NEXT TIME",
@@ -132,10 +127,3 @@ fun CardForm(){
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    MoveOnTheme {
-        LoginContent(rememberNavController())
-    }
-}

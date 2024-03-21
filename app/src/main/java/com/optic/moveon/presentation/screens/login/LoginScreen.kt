@@ -14,10 +14,13 @@ import com.optic.moveon.presentation.ui.theme.MoveOnTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(navController: NavHostController) {
+
+    val viewModel = LoginViewModel()
+
     Scaffold(
         topBar = {},
         content = {
-            LoginContent(navController)
+            LoginContent(navController, viewModel)
                   },
         bottomBar = {}
     )
