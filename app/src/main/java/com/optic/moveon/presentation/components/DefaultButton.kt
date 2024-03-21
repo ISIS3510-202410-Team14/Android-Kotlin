@@ -1,5 +1,6 @@
 package com.optic.moveon.presentation.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,23 +16,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun DefaultButton(
     text: String,
     onClick: () -> Unit,
     color: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.primary,
+    enabled: Boolean = true
 )
 {
-    Button(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 30.dp),
-        onClick = { onClick() },
-        colors = ButtonDefaults.buttonColors(color)
-    ) {
-        Text(text = text)
+    Column {
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp),
+            onClick = { onClick() },
+            colors = ButtonDefaults.buttonColors(color),
+            enabled = enabled
+        ) {
+            Text(text = text)
+        }
+        Spacer(modifier = Modifier.height(10.dp))
     }
-    Spacer(modifier = Modifier.height(10.dp))
-
 }

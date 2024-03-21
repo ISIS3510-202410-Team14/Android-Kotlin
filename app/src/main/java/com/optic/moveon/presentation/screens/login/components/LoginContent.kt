@@ -84,20 +84,29 @@ fun LoginContent(navController: NavHostController, viewModel: LoginViewModel = h
                     onValueChange = {viewModel.email.value = it},
                     label = "E-mail",
                     icon = Icons.Default.Email,
-                    keyboardType = KeyboardType.Email)
+                    keyboardType = KeyboardType.Email,
+                    errorMsg = viewModel.emailErrMsg.value,
+                    validateField = {
+                        viewModel.validateEmail()
+                    })
                 DefaultTextField(modifier = Modifier.padding(top = 25.dp),
                     value = viewModel.password.value,
                     onValueChange = {viewModel.password.value = it},
                     label = "Password",
                     icon = Icons.Default.Lock,
-                    hideText = true)
+                    hideText = true,
+                    errorMsg = viewModel.passwordErrMsg.value,
+                    validateField = {
+                        viewModel.validatePassword()
+                    })
                 Spacer(modifier = Modifier.height(30.dp))
                 DefaultButton(
                     text = "SIGN IN",
                     onClick = {
                         Log.d("LoginContent","Email: ${viewModel.email.value}")
                         Log.d("LoginContent","Password: ${viewModel.password.value}")
-                    }
+                    },
+                    enabled = viewModel.isEnabledLoginButton
                 )
                 DefaultButtonIcon(text = "NEXT TIME",
                     onClick = { /*TODO*/ },
